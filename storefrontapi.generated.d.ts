@@ -29,9 +29,7 @@ export type ProductVariantFragment = Pick<StorefrontAPI.ProductVariant, 'id' | '
 }
 
 export type ProductCardFragment = Pick<StorefrontAPI.Product, 'id' | 'title' | 'handle'> & {
-  images: {
-    nodes: Array<Pick<StorefrontAPI.Image, 'altText' | 'height' | 'url' | 'width'>>
-  }
+  images: { nodes: Array<Pick<StorefrontAPI.Image, 'altText' | 'height' | 'url' | 'width'>> }
   variants: {
     nodes: Array<
       Pick<StorefrontAPI.ProductVariant, 'id' | 'title'> & {
@@ -103,9 +101,7 @@ export type CollectionFragment = Pick<StorefrontAPI.Collection, 'id' | 'handle' 
   products: {
     nodes: Array<
       Pick<StorefrontAPI.Product, 'id' | 'title' | 'handle'> & {
-        images: {
-          nodes: Array<Pick<StorefrontAPI.Image, 'altText' | 'height' | 'url' | 'width'>>
-        }
+        images: { nodes: Array<Pick<StorefrontAPI.Image, 'altText' | 'height' | 'url' | 'width'>> }
         variants: {
           nodes: Array<
             Pick<StorefrontAPI.ProductVariant, 'id' | 'title'> & {
@@ -433,9 +429,7 @@ export type MenuFragment = Pick<StorefrontAPI.Menu, 'id'> & {
 export type ShopFragment = Pick<StorefrontAPI.Shop, 'id' | 'name' | 'description'> & {
   primaryDomain: Pick<StorefrontAPI.Domain, 'url'>
   brand?: StorefrontAPI.Maybe<{
-    logo?: StorefrontAPI.Maybe<{
-      image?: StorefrontAPI.Maybe<Pick<StorefrontAPI.Image, 'url'>>
-    }>
+    logo?: StorefrontAPI.Maybe<{ image?: StorefrontAPI.Maybe<Pick<StorefrontAPI.Image, 'url'>> }>
   }>
 }
 
@@ -449,9 +443,7 @@ export type HeaderQuery = {
   shop: Pick<StorefrontAPI.Shop, 'id' | 'name' | 'description'> & {
     primaryDomain: Pick<StorefrontAPI.Domain, 'url'>
     brand?: StorefrontAPI.Maybe<{
-      logo?: StorefrontAPI.Maybe<{
-        image?: StorefrontAPI.Maybe<Pick<StorefrontAPI.Image, 'url'>>
-      }>
+      logo?: StorefrontAPI.Maybe<{ image?: StorefrontAPI.Maybe<Pick<StorefrontAPI.Image, 'url'>> }>
     }>
   }
   menu?: StorefrontAPI.Maybe<

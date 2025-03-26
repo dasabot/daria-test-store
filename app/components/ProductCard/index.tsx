@@ -3,6 +3,7 @@ import { MediaImageFragment, ProductVariantFragment } from 'storefrontapi.genera
 import { useState } from 'react'
 import { currencies } from '~/lib/currencies'
 import clsx from 'clsx'
+import { getParsedPrice } from '~/lib/helpers'
 
 const ProductCard = ({ product, className }: ProductCardProps) => {
   const { title, brand, handle, options, variants } = product
@@ -30,7 +31,8 @@ const ProductCard = ({ product, className }: ProductCardProps) => {
 
   return (
     <div className={clsx(className, 'w-[315px] h-[452px] flex flex-col relative gap-[15px]')}>
-      {selectedVariant.price.amount === selectedVariant.compareAtPrice?.amount ? null : (
+      {getParsedPrice(selectedVariant.price.amount) >
+      getParsedPrice(selectedVariant.compareAtPrice?.amount) ? null : (
         <div className="bg-white absolute top-[20px] left-[20px] border border-red-500 rounded-[25.61px] px-[12.8px] py-[6.4px]">
           <span className="text-red-500 franklinGothicFont text-[15px] font-medium">On Sale!</span>
         </div>
@@ -69,9 +71,14 @@ const ProductCard = ({ product, className }: ProductCardProps) => {
           {title}
         </span>
         <div className="flex gap-[8px]">
-          <span className="line-through leading-[16px]">{`${priceSymbol}${selectedVariant.compareAtPrice?.amount}`}</span>
+          {selectedVariant?.compareAtPrice?.amount.length &&
+          parseFloat(selectedVariant.compareAtPrice.amount) > 0 ? (
+            <span className="line-through leading-[16px]">{`${priceSymbol}${getParsedPrice(
+              selectedVariant.compareAtPrice?.amount,
+            )}`}</span>
+          ) : null}
           <span className="text-red-600 leading-[16px]">
-            {`${priceSymbol}${selectedVariant.price?.amount}`}
+            {`${priceSymbol}${getParsedPrice(selectedVariant.price?.amount)}`}
           </span>
         </div>
       </div>
