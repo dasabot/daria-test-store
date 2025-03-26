@@ -12,7 +12,14 @@
     "typecheck": "tsc --noEmit",
     "codegen": "shopify hydrogen codegen"
   },
-  "prettier": "@shopify/prettier-config",
+  "prettier": {
+    "arrowParens": "always",
+    "singleQuote": true,
+    "bracketSpacing": true,
+    "trailingComma": "all",
+    "semi": false,
+    "printWidth": 100
+  },
   "dependencies": {
     "@remix-run/react": "^2.15.3",
     "@remix-run/server-runtime": "^2.15.3",

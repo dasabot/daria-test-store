@@ -1,18 +1,14 @@
-import type {
-  CartApiQueryFragment,
-  FooterQuery,
-  HeaderQuery,
-} from 'storefrontapi.generated';
-import {Footer} from '~/components/Footer';
-import {Header} from '~/components/Header';
+import type { CartApiQueryFragment, FooterQuery, HeaderQuery } from 'storefrontapi.generated'
+import { Footer } from '~/components/Footer'
+import { Header } from '~/components/Header'
 
 interface PageLayoutProps {
-  cart: Promise<CartApiQueryFragment | null>;
-  footer: Promise<FooterQuery | null>;
-  header: HeaderQuery;
-  isLoggedIn: Promise<boolean>;
-  publicStoreDomain: string;
-  children?: React.ReactNode;
+  cart: Promise<CartApiQueryFragment | null>
+  footer: Promise<FooterQuery | null>
+  header: HeaderQuery
+  isLoggedIn: Promise<boolean>
+  publicStoreDomain: string
+  children?: React.ReactNode
 }
 
 export function PageLayout({
@@ -32,11 +28,7 @@ export function PageLayout({
         publicStoreDomain={publicStoreDomain}
       />
       <main>{children}</main>
-      <Footer
-        footer={footer}
-        header={header}
-        publicStoreDomain={publicStoreDomain}
-      />
+      <Footer footer={footer} header={header} publicStoreDomain={publicStoreDomain} />
     </>
-  );
+  )
 }

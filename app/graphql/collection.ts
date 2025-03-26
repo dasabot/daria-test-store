@@ -1,4 +1,4 @@
-import {MEDIA_IMAGE_FRAGMENT} from './sharedObjects';
+import { MEDIA_IMAGE_FRAGMENT } from './sharedObjects'
 
 export const PRODUCT_VARIANT_FRAGMENT = `#graphql
 fragment ProductVariant on ProductVariant {
@@ -31,7 +31,7 @@ fragment ProductVariant on ProductVariant {
   }
 }
 ${MEDIA_IMAGE_FRAGMENT}
-` as const;
+` as const
 
 export const PRODUCT_CARD_FRAGMENT = `#graphql
 fragment ProductCard on Product {
@@ -66,7 +66,7 @@ fragment ProductCard on Product {
   }
 }
 ${PRODUCT_VARIANT_FRAGMENT}
-` as const;
+` as const
 
 export const COLLECTION_FRAGMENT = `#graphql
 fragment Collection on Collection {
@@ -80,7 +80,7 @@ fragment Collection on Collection {
   }
 }
 ${PRODUCT_CARD_FRAGMENT}
-` as const;
+` as const
 
 export const COLLECTION_QUERY = `#graphql
 query Collection(
@@ -93,4 +93,4 @@ query Collection(
     }
   }
   ${COLLECTION_FRAGMENT}
-` as const;
+` as const
