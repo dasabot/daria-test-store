@@ -143,12 +143,8 @@ export type ProductCardFragment = Pick<
 
 export type CollectionFragment = Pick<
   StorefrontAPI.Collection,
-  'id' | 'handle' | 'title' | 'description' | 'descriptionHtml'
+  'id' | 'handle' | 'title'
 > & {
-  seo: Pick<StorefrontAPI.Seo, 'title' | 'description'>;
-  image?: StorefrontAPI.Maybe<
-    Pick<StorefrontAPI.Image, 'altText' | 'height' | 'url' | 'width'>
-  >;
   products: {
     nodes: Array<
       Pick<StorefrontAPI.Product, 'id' | 'title' | 'handle'> & {
@@ -272,14 +268,7 @@ export type CollectionQueryVariables = StorefrontAPI.Exact<{
 
 export type CollectionQuery = {
   collection?: StorefrontAPI.Maybe<
-    Pick<
-      StorefrontAPI.Collection,
-      'id' | 'handle' | 'title' | 'description' | 'descriptionHtml'
-    > & {
-      seo: Pick<StorefrontAPI.Seo, 'title' | 'description'>;
-      image?: StorefrontAPI.Maybe<
-        Pick<StorefrontAPI.Image, 'altText' | 'height' | 'url' | 'width'>
-      >;
+    Pick<StorefrontAPI.Collection, 'id' | 'handle' | 'title'> & {
       products: {
         nodes: Array<
           Pick<StorefrontAPI.Product, 'id' | 'title' | 'handle'> & {
@@ -408,11 +397,6 @@ export type MediaImageFragment = {__typename: 'MediaImage'} & Pick<
       Pick<StorefrontAPI.Image, 'altText' | 'height' | 'url' | 'width'>
     >;
   };
-
-export type ColorFragment = Pick<StorefrontAPI.Metaobject, 'id'> & {
-  label?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
-  color?: StorefrontAPI.Maybe<Pick<StorefrontAPI.MetaobjectField, 'value'>>;
-};
 
 export type MoneyFragment = Pick<
   StorefrontAPI.MoneyV2,
@@ -707,7 +691,7 @@ export type StoreRobotsQueryVariables = StorefrontAPI.Exact<{
 export type StoreRobotsQuery = {shop: Pick<StorefrontAPI.Shop, 'id'>};
 
 interface GeneratedQueryTypes {
-  '#graphql\nquery Collection(\n    $handle: String!,\n    $country: CountryCode,\n    $language: LanguageCode)\n    @inContext(country: $country, language: $language) {\n    collection(handle: $handle) {\n      ...Collection\n    }\n  }\n  #graphql\nfragment Collection on Collection {\n  id\n  handle\n  seo {\n    title\n    description\n  }\n  title\n  description\n  descriptionHtml\n  image {\n    altText\n    height\n    url\n    width\n  }\n  products(first: 250) {\n    nodes {\n      ...ProductCard\n    }\n  }\n}\n#graphql\nfragment ProductCard on Product {\n  id\n  title\n  handle\n  images (first: 10) {\n      nodes  {\n        altText\n        height\n        url\n        width\n      }\n  }\n  variants(first: 20) {\n    nodes {\n      ...ProductVariant\n    }\n  }\n  options {\n    id\n    optionValues {\n      id\n      name\n    firstSelectableVariant {\n      ...ProductVariant\n    }\n  }\n  }\n  brand:metafield(namespace:"custom",key:"brand") {\n    value\n  }\n}\n#graphql\nfragment ProductVariant on ProductVariant {\n  id\n  title\n  price {\n    currencyCode\n    amount\n  }\n  compareAtPrice {\n    currencyCode\n    amount\n  }\n  mainImage: metafield(namespace: "custom", key: "main_image") {\n    reference {\n... MediaImage\n    }\n  }\n  hoverImage: metafield(namespace: "custom", key: "hover_image") {\n    reference {\n... MediaImage\n    }\n  }\n  colorHex: metafield(namespace: "custom", key: "color_hex") {\n    value\n  }\n  selectedOptions {\n    name\n    value\n  }\n}\n#graphql\n  fragment MediaImage on MediaImage {\n    __typename\n    id\n    image {\n      altText\n      height\n      url\n      width\n    }\n  }\n\n\n\n\n': {
+  '#graphql\nquery Collection(\n    $handle: String!,\n    $country: CountryCode,\n    $language: LanguageCode)\n    @inContext(country: $country, language: $language) {\n    collection(handle: $handle) {\n      ...Collection\n    }\n  }\n  #graphql\nfragment Collection on Collection {\n  id\n  handle\n  title\n  products(first: 250) {\n    nodes {\n      ...ProductCard\n    }\n  }\n}\n#graphql\nfragment ProductCard on Product {\n  id\n  title\n  handle\n  images (first: 10) {\n      nodes  {\n        altText\n        height\n        url\n        width\n      }\n  }\n  variants(first: 20) {\n    nodes {\n      ...ProductVariant\n    }\n  }\n  options {\n    id\n    optionValues {\n      id\n      name\n    firstSelectableVariant {\n      ...ProductVariant\n    }\n  }\n  }\n  brand:metafield(namespace:"custom",key:"brand") {\n    value\n  }\n}\n#graphql\nfragment ProductVariant on ProductVariant {\n  id\n  title\n  price {\n    currencyCode\n    amount\n  }\n  compareAtPrice {\n    currencyCode\n    amount\n  }\n  mainImage: metafield(namespace: "custom", key: "main_image") {\n    reference {\n      ... MediaImage\n    }\n  }\n  hoverImage: metafield(namespace: "custom", key: "hover_image") {\n    reference {\n      ... MediaImage\n    }\n  }\n  colorHex: metafield(namespace: "custom", key: "color_hex") {\n    value\n  }\n  selectedOptions {\n    name\n    value\n  }\n}\n#graphql\n  fragment MediaImage on MediaImage {\n    __typename\n    id\n    image {\n      altText\n      height\n      url\n      width\n    }\n  }\n\n\n\n\n': {
     return: CollectionQuery;
     variables: CollectionQueryVariables;
   };

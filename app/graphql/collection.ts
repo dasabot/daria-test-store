@@ -14,12 +14,12 @@ fragment ProductVariant on ProductVariant {
   }
   mainImage: metafield(namespace: "custom", key: "main_image") {
     reference {
-... MediaImage
+      ... MediaImage
     }
   }
   hoverImage: metafield(namespace: "custom", key: "hover_image") {
     reference {
-... MediaImage
+      ... MediaImage
     }
   }
   colorHex: metafield(namespace: "custom", key: "color_hex") {
@@ -72,19 +72,7 @@ export const COLLECTION_FRAGMENT = `#graphql
 fragment Collection on Collection {
   id
   handle
-  seo {
-    title
-    description
-  }
   title
-  description
-  descriptionHtml
-  image {
-    altText
-    height
-    url
-    width
-  }
   products(first: 250) {
     nodes {
       ...ProductCard

@@ -154,7 +154,6 @@ export function Layout({children}: {children?: React.ReactNode}) {
         <link rel="stylesheet" href={resetStyles}></link>
         <link rel="stylesheet" href={appStyles}></link>
         <link rel="stylesheet" href={tailwindStyles}></link>
-        <link href="https://fonts.googleapis.com/css2?family=Franklin+Gothic+ATF&display=swap" rel="stylesheet"></link>
         <Meta />
         <Links />
       </head>

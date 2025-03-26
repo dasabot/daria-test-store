@@ -4,6 +4,7 @@
  */
 
 @import 'tailwindcss';
+@import './fonts.css';
 
 @layer components {
 .franklinGothicFont {
