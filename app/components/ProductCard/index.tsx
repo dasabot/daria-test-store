@@ -1,9 +1,10 @@
 import { ProductCardProps } from './types'
 import { ProductVariantFragment } from 'storefrontapi.generated'
 import { useState, useMemo, useCallback } from 'react'
-import { currencies } from '~/lib/currencies'
 import clsx from 'clsx'
-import { getParsedPrice } from '~/lib/helpers'
+import Price from '../Price'
+import { Link } from '@remix-run/react'
+import Badge from '../Badge'
 
 const ProductCard = ({ product, className }: ProductCardProps) => {
   if (!product) return null
@@ -16,8 +17,6 @@ const ProductCard = ({ product, className }: ProductCardProps) => {
     selectedVariant?.mainImage?.reference?.image?.url,
   )
   const [hoverImage, setHoverImage] = useState(selectedVariant?.hoverImage?.reference?.image?.url)
-
-  const priceSymbol = currencies[selectedVariant?.price?.currencyCode] ?? currencies.USD
 
   const hasDiscount = useMemo(() => {
     const comparePrice = selectedVariant?.compareAtPrice?.amount ?? '0'
@@ -32,22 +31,25 @@ const ProductCard = ({ product, className }: ProductCardProps) => {
 
   return (
     <div className={clsx(className, 'w-[315px] h-[452px] flex flex-col relative gap-[15px]')}>
-      {hasDiscount && (
-        <div className="bg-white absolute top-[20px] left-[20px] border border-red-500 rounded-[25.61px] px-[12.8px] py-[6.4px]">
-          <span className="text-red-500 franklinGothicFont text-[15px] font-medium">On Sale!</span>
-        </div>
-      )}
-      <a
-        href={`/products/${handle}`}
+      {hasDiscount ? (
+        <Badge
+          className="absolute top-[20px] left-[20px] border-red-500"
+          textClassName="text-red-500"
+          text="On Sale!"
+        />
+      ) : null}
+      <Link
+        to={`/products/${handle}`}
         className="h-[340px] w-[315px] px-[20px] py-[20px] border rounded-[10px] bg-center bg-contain border-[#f8f8f8]"
         onMouseEnter={() => setCurrentImage(hoverImage)}
         onMouseLeave={() => setCurrentImage(selectedVariant?.mainImage?.reference?.image?.url)}
       >
         <img className="h-[301px] w-auto object-contain" src={currentImage} alt={title} />
-      </a>
+      </Link>
       <div className="flex gap-[5px]">
         {optionValues.map((option) => {
           const isSelected = selectedVariant.id === option?.firstSelectableVariant?.id
+
           return (
             <button
               key={option.id}
@@ -73,16 +75,7 @@ const ProductCard = ({ product, className }: ProductCardProps) => {
         <span className="block font-medium text-[16px] leading-[18px] text-[rgba(10,72,116,1)]">
           {title}
         </span>
-        <div className="flex gap-[8px]">
-          {hasDiscount && (
-            <span className="line-through leading-[16px]">
-              {`${priceSymbol}${getParsedPrice(selectedVariant?.compareAtPrice?.amount ?? '0')}`}
-            </span>
-          )}
-          <span className="text-red-600 leading-[16px]">
-            {`${priceSymbol}${getParsedPrice(selectedVariant?.price?.amount ?? '0')}`}
-          </span>
-        </div>
+        <Price price={selectedVariant.price} compareAtPrice={selectedVariant?.compareAtPrice} />
       </div>
     </div>
   )

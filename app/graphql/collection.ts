@@ -25,10 +25,6 @@ fragment ProductVariant on ProductVariant {
   colorHex: metafield(namespace: "custom", key: "color_hex") {
     value
   }
-  selectedOptions {
-    name
-    value
-  }
 }
 ${MEDIA_IMAGE_FRAGMENT}
 ` as const
